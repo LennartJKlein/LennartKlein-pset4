@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
-    android:descendantFocusability="blocksDescendants"
-    android:background="@color/colorGreyLight">
+    android:descendantFocusability="blocksDescendants">
 
     <CheckBox
         android:id="@+id/todo_completed"

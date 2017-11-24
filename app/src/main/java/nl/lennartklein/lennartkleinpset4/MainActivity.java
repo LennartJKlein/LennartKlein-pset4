@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             db.insert(title);
             input_todo.setText("");
             updateData();
-            ta.notifyDataSetChanged();
+            lv.setSelection(lv.getCount());
         }
     }
 
