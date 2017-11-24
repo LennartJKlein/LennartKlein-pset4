@@ -69,41 +69,46 @@ public class MainActivity extends AppCompatActivity {
         lv.setAdapter(ta);
 
         // Make list clickable
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CheckBox box = view.findViewById(R.id.todo_completed);
-                boolean status = box.isChecked();
-                status = !status;
-                db.update(l, status);
-                updateData();
-            }
-        });
+        lv.setOnItemClickListener(new TodoClickListener());
 
         // Make item deletable
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, final long l) {
-                // Show dialog
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                alert.setTitle(R.string.delete_todo);
-                alert.setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        db.delete(l);
-                        updateData();
-                    }
-                });
-                alert.setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
+        lv.setOnItemLongClickListener(new TodoLongClickListener());
     }
 
+    // Click on todo
+    private class TodoClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            CheckBox box = view.findViewById(R.id.todo_completed);
+            boolean status = box.isChecked();
+            status = !status;
+            db.update(l, status);
+            updateData();
+        }
+    }
+
+    // Long click on todo
+    private class TodoLongClickListener implements AdapterView.OnItemLongClickListener {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, final long l) {
+            // Show dialog
+            AlertDialog.Builder alert = new AlertDialog.Builder(context);
+            alert.setTitle(R.string.delete_todo);
+            alert.setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    db.delete(l);
+                    updateData();
+                }
+            });
+            alert.setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            alert.show();
+            return true;
+        }
+    }
 
     // Back button on device
     @Override
@@ -118,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
             db.insert(title);
             input_todo.setText("");
             updateData();
+            ta.notifyDataSetChanged();
         }
     }
 
     private void updateData() {
         ta.swapCursor(db.selectAll());
-        ta.notifyDataSetChanged();
     }
 
 }
