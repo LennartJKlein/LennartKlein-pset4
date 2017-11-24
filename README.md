@@ -2,7 +2,7 @@
 
 An android todo app for personal use. Users can add, delete and check todo items.
 
-![Todo - screenshot](/docs/screenshot.png?raw=true "Todo -main")
+![Todo - screenshot](/docs/screenshot.jpg?raw=true "Todo -main")
 
 ## Getting Started
 
