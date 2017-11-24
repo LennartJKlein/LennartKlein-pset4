@@ -1,4 +1,5 @@
 # ![Todo - icon](/docs/app-ico.png?raw=true "Todo - icon") Todo
+[![BCH compliance](https://bettercodehub.com/edge/badge/LennartJKlein/LennartKlein-pset4?branch=master)](https://bettercodehub.com/)
 
 An android todo app for personal use. Users can add, delete and check todo items.
 
